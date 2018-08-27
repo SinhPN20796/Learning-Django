@@ -1,0 +1,17 @@
+
+<h1>{{ question.question_text }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'testapp:vote' question.id %}" method="POST">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+	{{form.as_ul}}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    
+{% endfor %}
+<dl><input type="submit" value="Vote"></dl>
+</form>
+{% include 'testapp/delete-view.html' %}
+<a href="{% url 'testapp:add-choice' question.id %}">Add Choice</a>
+

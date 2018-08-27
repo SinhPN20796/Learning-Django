@@ -1,0 +1,20 @@
+
+{% if latest_question_list %}
+    <ul>
+    <h3>List Requsestion</h3>
+    {% for question in latest_question_list %}
+		{{form.as_ul}}
+    	<input type="radio" name="question" id="question{{ forloop.counter }}" value="{{ question.id }}">
+       	<a for="question{{ forloop.counter }}" href="{% url 'testapp:detail' question.id %}">{{ question.question_text }}</a><br>     	
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %} 
+
+<a href="{% url 'testapp:add-question' %}">Add Question</a>
+
+
+
+
+
